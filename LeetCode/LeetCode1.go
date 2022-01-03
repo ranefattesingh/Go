@@ -3,18 +3,14 @@ package main
 import "fmt"
 
 func twoSum(nums []int, target int) []int {
-	var indices []int = make([]int, 2)
-	for i := 0; i < len(nums); i++ {
-		for j := i + 1; j < len(nums); j++ {
-			if sum := nums[i] + nums[j]; sum == target {
-				indices[0] = i
-				indices[1] = j
-				i = len(nums)
-				break
-			}
+	s := make(map[int]int)
+	for i, v := range nums {
+		if j, ok := s[target-v]; ok {
+			return []int{j, i}
 		}
+		s[v] = i
 	}
-	return indices
+	return nil
 }
 
 func main() {
